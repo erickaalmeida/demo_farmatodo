@@ -2,8 +2,12 @@ package com.example.demo.services;
 
 import com.example.demo.models.NaturalNumberModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.util.http.fileupload.util.LimitedInputStream;
+import org.hibernate.collection.internal.PersistentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class SumService {
@@ -27,5 +31,40 @@ public class SumService {
             response = "No se pudo realizar la sumatoria";
             return response;
         }
+    }
+
+    public int sumSquares(int number)
+    {
+        int sum = 0;
+        int num = number;
+        while (num > 9) {
+            int unit = num % 10;
+            sum = sum + (unit * unit);
+            num = num / 10;
+        }
+        sum = sum + num * num;
+        return sum;
+    }
+
+    public boolean isHappy(int number)
+    {
+        System.out.println(number);
+        Integer n = number;
+        List<Integer> previous = new ArrayList<Integer>();
+        boolean stop = false;
+
+        while (!stop) {
+            if (n == 1)
+                stop = true;
+            else if (previous.contains(n))
+                stop = true;
+            else {
+                previous.add(n);
+                n = sumSquares(n);
+            }
+        }
+
+        boolean happy = n == 1;
+        return happy;
     }
 }

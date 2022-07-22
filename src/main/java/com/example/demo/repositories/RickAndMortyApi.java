@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RickAndMortyApi implements ApiThirdParty {
-    public JSONObject getData(Long id) throws MalformedURLException {
+    public JSONObject getData(String url) {
         try {
-            InputStream is = new URL("https://rickandmortyapi.com/api/episode/" + id).openStream();
+            InputStream is = new URL( url).openStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             JSONObject json = new JSONObject(jsonText);

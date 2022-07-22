@@ -1,13 +1,16 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name= "character")
-public class CharacterModel {
+@Table(name= "person")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PersonModel {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
     private String name;
@@ -18,6 +21,14 @@ public class CharacterModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
     private LocationModel location;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -59,6 +70,6 @@ public class CharacterModel {
         this.location = location;
     }
 
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "personList")
     Set<EpisodeModel> episodes;
 }

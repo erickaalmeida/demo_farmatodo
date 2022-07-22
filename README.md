@@ -9,5 +9,5 @@ Para correr la api Rest, utilice en Linux: ./mvnw spring-boot:run
 ```json{
    "numbers": [1, 2, 3, 203, 5, 7]
    }
-   ``
+   ```
 4. Endpoint:sum/{number} se utiliza para consultar la sumatoria de un número natural. Ejemplo: number: 10
